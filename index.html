@@ -1,0 +1,3296 @@
+{% extends "base.html" %}
+
+{% block title %}TEVOSYAN FURNITURE — Ժամանակակից կահույք{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   TEVOSYAN FURNITURE — HOME PAGE
+   Long Premium Homepage
+========================================================= */
+
+:root {
+    --home-dark: #11110f;
+    --home-dark-2: #1c1b18;
+    --home-beige: #f4f0e9;
+    --home-soft: #ece7df;
+    --home-line: #ded8cf;
+    --home-text: #181715;
+    --home-muted: #777169;
+    --home-gold: #d2ad69;
+    --home-white: #ffffff;
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+.homePage {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+}
+
+.home-section {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 115px 0;
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 46px;
+}
+
+.section-overline {
+    display: block;
+    margin-bottom: 13px;
+    color: #8e887f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--home-text);
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+
+.section-heading h2 span {
+    color: #999188;
+}
+
+.section-link {
+    color: #111;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    transition: .25s ease;
+}
+
+.section-link:hover {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-banner {
+    position: relative;
+    min-height: 92vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+    background: #111;
+}
+
+.hero-bg-image {
+    position: absolute;
+    inset: -5%;
+    z-index: -4;
+
+    background-image:
+        url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2400&q=95");
+
+    background-size: cover;
+    background-position: center;
+
+    animation:
+        heroZoom 15s ease-in-out infinite alternate;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7,7,7,.95) 0%,
+            rgba(7,7,7,.78) 34%,
+            rgba(7,7,7,.42) 64%,
+            rgba(7,7,7,.12) 100%
+        );
+}
+
+.hero-light {
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: .16;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.hero-light-1 {
+    top: -150px;
+    right: 7%;
+    background: var(--home-gold);
+    animation: floatingLight 9s ease-in-out infinite;
+}
+
+.hero-light-2 {
+    bottom: -180px;
+    left: 24%;
+    background: #fff;
+    animation: floatingLight 12s ease-in-out infinite reverse;
+}
+
+.hero-content {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 120px 0 110px;
+    color: #fff;
+}
+
+.hero-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .23em;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroUp .8s ease forwards;
+    animation-delay: .15s;
+}
+
+.hero-label-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--home-gold);
+    box-shadow: 0 0 22px var(--home-gold);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.hero-content h1 {
+    max-width: 900px;
+    margin: 25px 0 22px;
+
+    font-size: clamp(50px, 8vw, 102px);
+    line-height: .93;
+    letter-spacing: -.06em;
+
+    opacity: 0;
+    transform: translateY(35px);
+    animation: heroUp 1s ease forwards;
+    animation-delay: .35s;
+}
+
+.hero-content h1 span {
+    display: block;
+    color: var(--home-gold);
+}
+
+.hero-description {
+    max-width: 610px;
+    margin: 0;
+    color: rgba(255,255,255,.72);
+    font-size: 16px;
+    line-height: 1.85;
+
+    opacity: 0;
+    transform: translateY(25px);
+    animation: heroUp .85s ease forwards;
+    animation-delay: .58s;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 34px;
+
+    opacity: 0;
+    transform: translateY(25px);
+    animation: heroUp .85s ease forwards;
+    animation-delay: .8s;
+}
+
+.hero-btn {
+    min-height: 55px;
+    padding: 0 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    transition: .3s ease;
+}
+
+.hero-btn-primary {
+    background: #fff;
+    color: #111;
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-4px);
+    background: var(--home-gold);
+}
+
+.hero-btn-secondary {
+    border: 1px solid rgba(255,255,255,.35);
+    color: #fff;
+    backdrop-filter: blur(8px);
+}
+
+.hero-btn-secondary:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,.09);
+}
+
+.hero-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    margin-top: 64px;
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroUp .85s ease forwards;
+    animation-delay: 1s;
+}
+
+.hero-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hero-info strong {
+    color: #fff;
+    font-size: 25px;
+}
+
+.hero-info span {
+    color: rgba(255,255,255,.5);
+    font-size: 11px;
+}
+
+.hero-scroll {
+    position: absolute;
+    right: 34px;
+    bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 11px;
+    color: rgba(255,255,255,.48);
+    font-size: 9px;
+    letter-spacing: .22em;
+    animation: scrollFloat 2s ease-in-out infinite;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 55px;
+    background: linear-gradient(to bottom, #fff, transparent);
+}
+
+
+/* =========================================================
+   TRUST STRIP
+========================================================= */
+
+.homeTrust {
+    position: relative;
+    z-index: 3;
+    width: min(1160px, 90%);
+    margin: -55px auto 0;
+}
+
+.homeTrustGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+    border: 1px solid var(--home-line);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 25px 70px rgba(0,0,0,.08);
+}
+
+.homeTrustItem {
+    min-height: 135px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-right: 1px solid var(--home-line);
+}
+
+.homeTrustItem:last-child {
+    border-right: 0;
+}
+
+.homeTrustIcon {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 18px;
+}
+
+.homeTrustText strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #1c1a17;
+    font-size: 12px;
+}
+
+.homeTrustText span {
+    display: block;
+    color: #8b857d;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BEST SELLERS
+========================================================= */
+
+.best-sellers-section {
+    padding-top: 105px;
+    padding-bottom: 120px;
+}
+
+.best-sellers-heading {
+    margin-bottom: 42px;
+}
+
+.best-sellers-subtitle {
+    max-width: 630px;
+    margin: 16px 0 0;
+    color: #7e786f;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.best-sellers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.best-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: #f1eee8;
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.best-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 24px 55px rgba(0,0,0,.12);
+}
+
+.best-card-image {
+    position: relative;
+    height: 460px;
+    overflow: hidden;
+    background: #e6e0d8;
+}
+
+.best-card-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.best-card-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.best-card:hover .best-card-image img {
+    transform: scale(1.06);
+}
+
+.best-index {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.55);
+    background: rgba(0,0,0,.13);
+    color: #fff;
+    backdrop-filter: blur(9px);
+    font-size: 10px;
+}
+
+.best-label {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    padding: 9px 12px;
+    background: #111;
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: .18em;
+}
+
+.best-sale {
+    position: absolute;
+    left: 17px;
+    bottom: 17px;
+    padding: 8px 10px;
+    background: #fff;
+    color: #8c5045;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.best-open {
+    position: absolute;
+    right: 17px;
+    bottom: 17px;
+    width: 49px;
+    height: 49px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.96);
+    color: #111;
+    text-decoration: none;
+    font-size: 19px;
+    transition: transform .3s ease;
+}
+
+.best-open:hover {
+    transform: rotate(45deg);
+}
+
+.best-card-content {
+    padding: 23px;
+}
+
+.best-category {
+    display: block;
+    margin-bottom: 8px;
+    color: #979188;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.best-card-content h3 {
+    margin: 0 0 12px;
+    font-size: 23px;
+    line-height: 1.15;
+}
+
+.best-card-content h3 a {
+    color: #111;
+    text-decoration: none;
+}
+
+.best-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.best-rating span {
+    color: #111;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.best-rating small {
+    color: #999;
+    font-size: 11px;
+}
+
+.best-prices {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.best-prices strong {
+    color: #111;
+    font-size: 22px;
+}
+
+.best-prices del {
+    margin-left: 8px;
+    color: #999;
+    font-size: 12px;
+}
+
+.best-stock {
+    color: #5a765e;
+    font-size: 10px;
+}
+
+.best-stock.out {
+    color: #9a5f55;
+}
+
+.best-card-footer {
+    margin-top: 17px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd8d0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.best-details {
+    color: #111;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+    transition: transform .25s ease;
+}
+
+.best-details:hover {
+    transform: translateX(5px);
+}
+
+.best-cart {
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    padding: 10px 13px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: .3s ease;
+}
+
+.best-cart:hover {
+    background: transparent;
+    color: #111;
+}
+
+.best-loading,
+.best-error {
+    grid-column: 1 / -1;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #999;
+}
+
+
+/* =========================================================
+   COLLECTION INTRO
+========================================================= */
+
+.collectionIntro {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 0 0 35px;
+}
+
+.collectionIntroGrid {
+    display: grid;
+    grid-template-columns: .75fr 1.25fr;
+    gap: 60px;
+    align-items: end;
+}
+
+.collectionIntroLabel {
+    color: #958e85;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+}
+
+.collectionIntroTitle {
+    margin: 13px 0 0;
+    color: #111;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: .99;
+    letter-spacing: -.05em;
+}
+
+.collectionIntroText {
+    color: #747068;
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 650px;
+}
+
+
+/* =========================================================
+   COLLECTIONS
+========================================================= */
+
+.collectionsHome {
+    padding-top: 25px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-rows: 330px 330px;
+    gap: 18px;
+}
+
+.category-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
+}
+
+.category-large {
+    grid-row: span 2;
+}
+
+.category-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .9s cubic-bezier(.2,.7,.2,1);
+}
+
+.category-card:hover img {
+    transform: scale(1.08);
+}
+
+.category-card-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.87),
+            rgba(0,0,0,.04) 65%
+        );
+}
+
+.category-card-content {
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    bottom: 25px;
+}
+
+.category-card-content > span {
+    font-size: 10px;
+    letter-spacing: .25em;
+    opacity: .68;
+}
+
+.category-card-content h3 {
+    margin: 8px 0 4px;
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.category-card-content p {
+    margin: 0 0 14px;
+    color: rgba(255,255,255,.68);
+    font-size: 12px;
+}
+
+.category-card-content b {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PROMO BANNER
+========================================================= */
+
+.promoBanner {
+    width: min(1260px, 92%);
+    margin: 20px auto 115px;
+}
+
+.promoBannerInner {
+    position: relative;
+    min-height: 465px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 28px;
+    background: #171614;
+    color: #fff;
+}
+
+.promoBannerImage {
+    position: absolute;
+    inset: 0 0 0 45%;
+    background-image:
+        url("https://images.unsplash.com/photo-1550226891-ef816aed4a98?auto=format&fit=crop&w=1500&q=90");
+    background-size: cover;
+    background-position: center;
+}
+
+.promoBannerOverlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            #171614 0%,
+            #171614 34%,
+            rgba(23,22,20,.78) 49%,
+            rgba(23,22,20,.18) 100%
+        );
+}
+
+.promoBannerContent {
+    position: relative;
+    z-index: 2;
+    width: min(650px, 60%);
+    padding: 65px;
+}
+
+.promoBannerContent small {
+    color: var(--home-gold);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+}
+
+.promoBannerContent h2 {
+    margin: 16px 0 18px;
+    font-size: clamp(36px, 5vw, 61px);
+    line-height: .98;
+    letter-spacing: -.045em;
+}
+
+.promoBannerContent p {
+    max-width: 540px;
+    color: rgba(255,255,255,.65);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.promoButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+    margin-top: 23px;
+    padding: 0 21px;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    transition: .3s ease;
+}
+
+.promoButton:hover {
+    transform: translateY(-3px);
+    background: var(--home-gold);
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.aboutHome {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 0 0 115px;
+}
+
+.aboutHomeGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+}
+
+.aboutHomeImage {
+    min-height: 600px;
+    background:
+        url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1500&q=90")
+        center / cover;
+}
+
+.aboutHomeContent {
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f3efe8;
+}
+
+.aboutHomeContent small {
+    color: #8f897f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .19em;
+}
+
+.aboutHomeContent h2 {
+    margin: 16px 0 22px;
+    color: #111;
+    font-size: clamp(39px, 5vw, 64px);
+    line-height: .99;
+    letter-spacing: -.05em;
+}
+
+.aboutHomeContent h2 span {
+    color: #908980;
+}
+
+.aboutHomeContent p {
+    max-width: 555px;
+    color: #706a62;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.aboutHomeLine {
+    width: 65px;
+    height: 1px;
+    margin: 26px 0;
+    background: #111;
+}
+
+.aboutHomeFacts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.aboutHomeFact strong {
+    display: block;
+    color: #111;
+    font-size: 24px;
+}
+
+.aboutHomeFact span {
+    color: #8a847c;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.statsHome {
+    width: 100%;
+    margin-bottom: 115px;
+    background: #141412;
+    color: #fff;
+}
+
+.statsHomeInner {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.statHome {
+    min-height: 210px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid rgba(255,255,255,.09);
+}
+
+.statHome:last-child {
+    border-right: 0;
+}
+
+.statHomeIcon {
+    margin-bottom: 18px;
+    color: var(--home-gold);
+    font-size: 21px;
+}
+
+.statHome strong {
+    color: #fff;
+    font-size: 40px;
+    letter-spacing: -.04em;
+}
+
+.statHome span {
+    margin-top: 6px;
+    color: rgba(255,255,255,.47);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   INSPIRATION
+========================================================= */
+
+.inspirationHome {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding-bottom: 115px;
+}
+
+.inspirationHeading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.inspirationHeading small {
+    color: #8f897f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+}
+
+.inspirationHeading h2 {
+    margin: 12px 0 0;
+    color: #111;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+
+.inspirationHeading h2 span {
+    color: #968e85;
+}
+
+.instagramLink {
+    color: #111;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.inspirationGrid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr .8fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 14px;
+}
+
+.inspirationItem {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.inspirationItem.large {
+    grid-row: span 2;
+}
+
+.inspirationItem.wide {
+    grid-column: span 2;
+}
+
+.inspirationItem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .7s ease;
+}
+
+.inspirationItem:hover img {
+    transform: scale(1.06);
+}
+
+.inspirationItemOverlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.68),
+            transparent 58%
+        );
+}
+
+.inspirationItemText {
+    position: absolute;
+    left: 20px;
+    bottom: 18px;
+    color: #fff;
+}
+
+.inspirationItemText small {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 8px;
+    letter-spacing: .15em;
+    opacity: .65;
+}
+
+.inspirationItemText strong {
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TESTIMONIAL / QUOTE
+========================================================= */
+
+.quoteHome {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding-bottom: 115px;
+}
+
+.quoteHomeInner {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    border-radius: 28px;
+    background: #f1ece5;
+}
+
+.quoteHomeInner::before {
+    content: "“";
+    position: absolute;
+    top: -85px;
+    right: 55px;
+    color: rgba(17,17,17,.055);
+    font-family: Georgia, serif;
+    font-size: 340px;
+    line-height: 1;
+}
+
+.quoteHomeContent {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 72px 40px;
+    text-align: center;
+}
+
+.quoteHomeContent small {
+    color: #928b81;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+}
+
+.quoteHomeContent blockquote {
+    margin: 23px 0;
+    color: #171614;
+    font-size: clamp(29px, 4vw, 48px);
+    line-height: 1.12;
+    letter-spacing: -.04em;
+}
+
+.quoteHomeContent p {
+    color: #777169;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BIG CTA
+========================================================= */
+
+.bigHomeCta {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding-bottom: 115px;
+}
+
+.bigHomeCtaInner {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 28px;
+    background:
+        linear-gradient(
+            125deg,
+            #171614,
+            #2a2824
+        );
+    color: #fff;
+}
+
+.bigHomeCtaImage {
+    position: absolute;
+    inset: 0 0 0 58%;
+    background:
+        url("https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1500&q=90")
+        center / cover;
+}
+
+.bigHomeCtaOverlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            #171614 0%,
+            #171614 42%,
+            rgba(23,22,20,.62) 60%,
+            rgba(23,22,20,.08) 100%
+        );
+}
+
+.bigHomeCtaContent {
+    position: relative;
+    z-index: 2;
+    width: min(650px, 64%);
+    padding: 68px;
+}
+
+.bigHomeCtaContent small {
+    color: var(--home-gold);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .19em;
+}
+
+.bigHomeCtaContent h2 {
+    margin: 14px 0 18px;
+    font-size: clamp(38px, 5vw, 63px);
+    line-height: 1;
+    letter-spacing: -.05em;
+}
+
+.bigHomeCtaContent p {
+    max-width: 540px;
+    margin: 0;
+    color: rgba(255,255,255,.62);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.bigCtaButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 27px;
+    flex-wrap: wrap;
+}
+
+.bigCtaPrimary,
+.bigCtaSecondary {
+    min-height: 50px;
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+    transition: .3s ease;
+}
+
+.bigCtaPrimary {
+    background: #fff;
+    color: #111;
+}
+
+.bigCtaPrimary:hover {
+    transform: translateY(-3px);
+    background: var(--home-gold);
+}
+
+.bigCtaSecondary {
+    border: 1px solid rgba(255,255,255,.27);
+    color: #fff;
+}
+
+.bigCtaSecondary:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   HOME FOOTER
+========================================================= */
+
+.homeFooter {
+    width: 100%;
+    background: #10100f;
+    color: #fff;
+}
+
+.homeFooterTop {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 78px 0 65px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 55px;
+}
+
+.homeFooterBrand h2 {
+    margin: 0;
+    font-size: 29px;
+    letter-spacing: .1em;
+}
+
+.homeFooterBrand > span {
+    display: block;
+    margin-top: 3px;
+    color: #8d887f;
+    font-size: 9px;
+    letter-spacing: .32em;
+}
+
+.homeFooterBrand p {
+    max-width: 340px;
+    margin: 23px 0;
+    color: #8d8982;
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+.homeFooterSocials {
+    display: flex;
+    gap: 9px;
+}
+
+.homeFooterSocials a {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    transition: .25s ease;
+}
+
+.homeFooterSocials a:hover {
+    transform: translateY(-3px);
+    background: #fff;
+    color: #111;
+}
+
+.homeFooterColumn h3 {
+    margin: 0 0 19px;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: .18em;
+}
+
+.homeFooterColumn a {
+    display: block;
+    margin-bottom: 12px;
+    color: #858078;
+    text-decoration: none;
+    font-size: 11px;
+    transition: .23s ease;
+}
+
+.homeFooterColumn a:hover {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.homeFooterContact {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.homeFooterContactItem {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.homeFooterContactItem small {
+    color: #777169;
+    font-size: 9px;
+    letter-spacing: .14em;
+}
+
+.homeFooterContactItem strong,
+.homeFooterContactItem a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.homeFooterBottom {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    min-height: 77px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.homeFooterBottom span {
+    color: #6d6861;
+    font-size: 10px;
+}
+
+.homeFooterBottom strong {
+    color: #aaa49c;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes heroZoom {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+
+}
+
+@keyframes heroUp {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes floatingLight {
+
+    0%,
+    100% {
+        transform: translate3d(0,0,0);
+    }
+
+    50% {
+        transform: translate3d(75px,40px,0);
+    }
+
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: .7;
+    }
+
+    50% {
+        transform: scale(1.45);
+        opacity: 1;
+    }
+
+}
+
+@keyframes scrollFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .homeTrustGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .homeTrustItem:nth-child(2) {
+        border-right: 0;
+    }
+
+    .homeTrustItem:nth-child(-n+2) {
+        border-bottom: 1px solid var(--home-line);
+    }
+
+    .best-sellers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .best-card:last-child {
+        display: none;
+    }
+
+    .aboutHomeGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .aboutHomeImage {
+        min-height: 460px;
+    }
+
+    .statsHomeInner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .statHome:nth-child(2) {
+        border-right: 0;
+    }
+
+    .statHome:nth-child(-n+2) {
+        border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+
+    .inspirationGrid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 250px);
+    }
+
+    .inspirationItem.large {
+        grid-row: span 2;
+    }
+
+    .inspirationItem.wide {
+        grid-column: span 2;
+    }
+
+    .homeFooterTop {
+        grid-template-columns: 1.3fr 1fr 1fr;
+    }
+
+    .homeFooterBrand {
+        grid-column: span 3;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .home-section {
+        width: calc(100% - 32px);
+        padding: 78px 0;
+    }
+
+    .hero-banner {
+        min-height: 760px;
+    }
+
+    .hero-content {
+        width: calc(100% - 32px);
+        padding: 85px 0;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(47px, 15vw, 76px);
+        letter-spacing: -.05em;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        align-items: stretch;
+        flex-direction: column;
+        max-width: 330px;
+    }
+
+    .hero-btn {
+        width: 100%;
+    }
+
+    .hero-info {
+        gap: 22px;
+        margin-top: 43px;
+    }
+
+    .hero-scroll {
+        display: none;
+    }
+
+    .homeTrust {
+        width: calc(100% - 32px);
+        margin-top: -35px;
+    }
+
+    .homeTrustGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .homeTrustItem {
+        min-height: 115px;
+        border-right: 0;
+        border-bottom: 1px solid var(--home-line);
+    }
+
+    .homeTrustItem:last-child {
+        border-bottom: 0;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .best-sellers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .best-card:last-child {
+        display: block;
+    }
+
+    .best-card-image {
+        height: 410px;
+    }
+
+    .collectionIntro {
+        width: calc(100% - 32px);
+    }
+
+    .collectionIntroGrid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 290px);
+    }
+
+    .category-large {
+        grid-row: span 1;
+    }
+
+    .promoBanner {
+        width: calc(100% - 32px);
+        margin-bottom: 78px;
+    }
+
+    .promoBannerInner {
+        min-height: 590px;
+        align-items: flex-end;
+    }
+
+    .promoBannerImage {
+        inset: 0 0 42% 0;
+    }
+
+    .promoBannerOverlay {
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(23,22,20,.1),
+                #171614 56%
+            );
+    }
+
+    .promoBannerContent {
+        width: 100%;
+        padding: 34px 27px;
+    }
+
+    .aboutHome {
+        width: calc(100% - 32px);
+    }
+
+    .aboutHomeImage {
+        min-height: 360px;
+    }
+
+    .aboutHomeContent {
+        padding: 42px 26px;
+    }
+
+    .aboutHomeFacts {
+        grid-template-columns: 1fr;
+    }
+
+    .statsHome {
+        margin-bottom: 80px;
+    }
+
+    .statsHomeInner {
+        width: calc(100% - 32px);
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .statHome {
+        min-height: 170px;
+        padding: 25px 18px;
+    }
+
+    .statHome:nth-child(2) {
+        border-right: 0;
+    }
+
+    .statHome:nth-child(-n+2) {
+        border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+
+    .statHome:nth-child(3) {
+        border-right: 1px solid rgba(255,255,255,.09);
+    }
+
+    .inspirationHome {
+        width: calc(100% - 32px);
+    }
+
+    .inspirationHeading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .inspirationGrid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(4, 210px);
+    }
+
+    .inspirationItem.large {
+        grid-row: span 2;
+    }
+
+    .inspirationItem.wide {
+        grid-column: span 2;
+    }
+
+    .quoteHome {
+        width: calc(100% - 32px);
+        padding-bottom: 80px;
+    }
+
+    .quoteHomeContent {
+        padding: 57px 25px;
+    }
+
+    .bigHomeCta {
+        width: calc(100% - 32px);
+        padding-bottom: 80px;
+    }
+
+    .bigHomeCtaInner {
+        min-height: 610px;
+        align-items: flex-end;
+    }
+
+    .bigHomeCtaImage {
+        inset: 0 0 48% 0;
+    }
+
+    .bigHomeCtaOverlay {
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(23,22,20,.08),
+                #171614 60%
+            );
+    }
+
+    .bigHomeCtaContent {
+        width: 100%;
+        padding: 38px 25px;
+    }
+
+    .homeFooterTop {
+        width: calc(100% - 32px);
+        grid-template-columns: 1fr 1fr;
+        gap: 38px 25px;
+        padding: 60px 0 45px;
+    }
+
+    .homeFooterBrand {
+        grid-column: span 2;
+    }
+
+    .homeFooterColumn:last-child {
+        grid-column: span 2;
+    }
+
+    .homeFooterContact {
+        width: calc(100% - 32px);
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .homeFooterBottom {
+        width: calc(100% - 32px);
+        padding: 20px 0;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 430px) {
+
+    .best-card-image {
+        height: 370px;
+    }
+
+    .hero-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .inspirationGrid {
+        grid-template-rows: repeat(4, 185px);
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA PREMIUM HOME MODULES
+========================================================= */
+
+.homeAnnouncement {
+    width: 100%;
+    overflow: hidden;
+    background: #11110f;
+    color: #fff;
+    border-top: 1px solid rgba(255,255,255,.06);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.homeAnnouncementTrack {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 42px;
+    padding: 12px 0;
+    animation: announcementMove 26s linear infinite;
+}
+
+.homeAnnouncementItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    color: rgba(255,255,255,.76);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.homeAnnouncementItem b {
+    color: var(--home-gold);
+}
+
+.quickHome {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 30px 0 15px;
+}
+
+.quickHomeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.quickHomeCard {
+    min-height: 88px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border: 1px solid var(--home-line);
+    border-radius: 16px;
+    background: #faf8f4;
+    color: #111;
+    text-decoration: none;
+    transition: .28s ease;
+}
+
+.quickHomeCard:hover {
+    transform: translateY(-4px);
+    background: #f1ece4;
+    box-shadow: 0 14px 30px rgba(0,0,0,.06);
+}
+
+.quickHomeCard small {
+    display: block;
+    margin-bottom: 5px;
+    color: #928b82;
+    font-size: 8px;
+    letter-spacing: .16em;
+}
+
+.quickHomeCard strong {
+    font-size: 13px;
+}
+
+.quickHomeCard span {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 13px;
+}
+
+.flashHome {
+    width: min(1260px, 92%);
+    margin: 10px auto 105px;
+}
+
+.flashHomeInner {
+    position: relative;
+    min-height: 250px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #eee6da;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+}
+
+.flashHomeContent {
+    padding: 42px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flashHomeContent small {
+    color: #8b4d41;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+}
+
+.flashHomeContent h2 {
+    margin: 11px 0 8px;
+    color: #171614;
+    font-size: clamp(31px, 4vw, 49px);
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+
+.flashHomeContent p {
+    max-width: 520px;
+    margin: 0;
+    color: #736c63;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.flashHomeButton {
+    width: fit-content;
+    margin-top: 18px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 800;
+    transition: .25s ease;
+}
+
+.flashHomeButton:hover {
+    transform: translateY(-3px);
+    background: var(--home-gold);
+    color: #111;
+}
+
+.flashHomeImage {
+    min-height: 250px;
+    background:
+        linear-gradient(90deg, rgba(238,230,218,.04), rgba(238,230,218,.04)),
+        url("https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1400&q=90")
+        center / cover;
+}
+
+.howHome {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 0 0 115px;
+}
+
+.howHomeHeader {
+    max-width: 720px;
+    margin-bottom: 38px;
+}
+
+.howHomeHeader small {
+    color: #908a81;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+}
+
+.howHomeHeader h2 {
+    margin: 11px 0 12px;
+    color: #111;
+    font-size: clamp(37px, 5vw, 58px);
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+
+.howHomeHeader p {
+    margin: 0;
+    color: #746e66;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.howHomeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--home-line);
+    border-left: 1px solid var(--home-line);
+}
+
+.howHomeStep {
+    min-height: 215px;
+    padding: 28px;
+    border-right: 1px solid var(--home-line);
+    border-bottom: 1px solid var(--home-line);
+    background: #faf8f4;
+}
+
+.howHomeNumber {
+    color: #a19a91;
+    font-size: 10px;
+    letter-spacing: .18em;
+}
+
+.howHomeIcon {
+    width: 46px;
+    height: 46px;
+    margin: 28px 0 20px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 17px;
+}
+
+.howHomeStep h3 {
+    margin: 0 0 8px;
+    color: #171614;
+    font-size: 16px;
+}
+
+.howHomeStep p {
+    margin: 0;
+    color: #7f786f;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.locationHome {
+    width: min(1260px, 92%);
+    margin: 0 auto;
+    padding: 0 0 115px;
+}
+
+.locationHomeInner {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #f2eee7;
+}
+
+.locationHomeContent {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.locationHomeGlobe {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 18px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #d7d0c7;
+    border-radius: 50%;
+    color: #111;
+    font-size: 22px;
+}
+
+.locationHomeContent small {
+    color: #908980;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+}
+
+.locationHomeContent h2 {
+    margin: 10px 0 9px;
+    color: #111;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: -.045em;
+}
+
+.locationHomeContent p {
+    max-width: 470px;
+    margin: 0;
+    color: #706a62;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.locationHomeMeta {
+    margin-top: 19px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.locationHomeMeta span {
+    padding: 8px 11px;
+    border-radius: 999px;
+    background: #fff;
+    color: #5e5952;
+    font-size: 10px;
+}
+
+.locationHomeVisual {
+    min-height: 300px;
+    background:
+        linear-gradient(135deg, rgba(20,20,18,.05), rgba(20,20,18,.05)),
+        url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1500&q=90")
+        center / cover;
+}
+
+.adminQuick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 19px;
+    color: #6d675f;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    opacity: .72;
+    transition: .2s ease;
+}
+
+.adminQuick:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+@keyframes announcementMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@media (max-width: 1000px) {
+    .quickHomeGrid,
+    .howHomeGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flashHomeInner,
+    .locationHomeInner {
+        grid-template-columns: 1fr;
+    }
+
+    .flashHomeImage {
+        min-height: 280px;
+    }
+}
+
+@media (max-width: 700px) {
+    .quickHomeGrid,
+    .howHomeGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .quickHome,
+    .flashHome,
+    .howHome,
+    .locationHome {
+        width: calc(100% - 32px);
+    }
+
+    .quickHomeCard {
+        min-height: 76px;
+    }
+
+    .flashHomeContent {
+        padding: 35px 25px;
+    }
+
+    .flashHomeImage {
+        min-height: 230px;
+    }
+
+    .locationHomeContent {
+        padding: 35px 25px;
+    }
+}
+
+</style>
+
+
+<div class="homePage">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero-banner">
+
+        <div class="hero-bg-image"></div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-light hero-light-1"></div>
+
+        <div class="hero-light hero-light-2"></div>
+
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+
+                <span class="hero-label-dot"></span>
+
+                TEVOSYAN FURNITURE
+
+            </div>
+
+
+            <h1>
+
+                Ձեր տան համար
+
+                <span>
+                    նոր մակարդակ
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Ժամանակակից կահույք՝ գեղեցիկ դիզայնով,
+                բարձր որակով և Ձեր տարածքին համապատասխան
+                լուծումներով։
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="/shop"
+                    class="hero-btn hero-btn-primary"
+                >
+                    Դիտել կատալոգը
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a
+                    href="#collections"
+                    class="hero-btn hero-btn-secondary"
+                >
+                    Բացահայտել
+                </a>
+
+            </div>
+
+
+            <div class="hero-info">
+
+                <div>
+                    <strong>15+</strong>
+                    <span>Ապրանք</span>
+                </div>
+
+                <div>
+                    <strong>5</strong>
+                    <span>Կատեգորիա</span>
+                </div>
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Ուշադրություն դետալներին</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-scroll">
+
+            <span>
+                SCROLL
+            </span>
+
+            <div class="scroll-line"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ANNOUNCEMENT STRIP
+    ====================================================== -->
+
+    <div class="homeAnnouncement">
+        <div class="homeAnnouncementTrack">
+            <span class="homeAnnouncementItem"><b>TEVOSYAN</b> Furniture Collection</span>
+            <span class="homeAnnouncementItem">Ժամանակակից կահույք՝ Ձեր տան համար</span>
+            <span class="homeAnnouncementItem"><b>2026</b> New Collection</span>
+            <span class="homeAnnouncementItem">Պատվերներ և խորհրդատվություն</span>
+            <span class="homeAnnouncementItem"><b>077 705 706</b> Կապ մեզ հետ</span>
+            <span class="homeAnnouncementItem"><b>TEVOSYAN</b> Furniture Collection</span>
+            <span class="homeAnnouncementItem">Ժամանակակից կահույք՝ Ձեր տան համար</span>
+            <span class="homeAnnouncementItem"><b>2026</b> New Collection</span>
+            <span class="homeAnnouncementItem">Պատվերներ և խորհրդատվություն</span>
+            <span class="homeAnnouncementItem"><b>077 705 706</b> Կապ մեզ հետ</span>
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <section class="quickHome">
+        <div class="quickHomeGrid">
+
+            <a href="/shop?category=Հյուրասենյակ" class="quickHomeCard">
+                <div>
+                    <small>01 / LIVING</small>
+                    <strong>Հյուրասենյակ</strong>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="/shop?category=Ննջասենյակ" class="quickHomeCard">
+                <div>
+                    <small>02 / BEDROOM</small>
+                    <strong>Ննջասենյակ</strong>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="/shop?category=Խոհանոց" class="quickHomeCard">
+                <div>
+                    <small>03 / KITCHEN</small>
+                    <strong>Խոհանոց</strong>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="/shop" class="quickHomeCard">
+                <div>
+                    <small>04 / COLLECTION</small>
+                    <strong>Ամբողջ կատալոգը</strong>
+                </div>
+                <span>→</span>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- =====================================================
+         TRUST
+    ====================================================== -->
+
+    
+    <!-- =====================================================
+         BEST SELLERS
+    ====================================================== -->
+
+    <section
+        class="home-section best-sellers-section"
+        id="best-sellers"
+    >
+
+        <div
+            class="section-heading best-sellers-heading"
+        >
+
+            <div>
+
+                <span class="section-overline">
+                    BEST SELLERS / TEVOSYAN COLLECTION
+                </span>
+
+
+                <h2>
+
+                    Ամենապահանջված
+
+                    <span>
+                        ապրանքները
+                    </span>
+
+                </h2>
+
+
+                <p class="best-sellers-subtitle">
+
+                    Ընտրված մոդելներ՝ գեղեցիկ դիզայնով,
+                    ճիշտ գնով և Ձեր տան համար ստեղծված
+                    լուծումներով։
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="/shop"
+                class="section-link"
+            >
+                Դիտել ամբողջ կատալոգը →
+            </a>
+
+        </div>
+
+
+        <!-- IMPORTANT:
+             HOME.JS-ն աշխատում է հենց այս ID-ով
+        -->
+
+        <div
+            id="homeBestSellers"
+            class="best-sellers-grid"
+        >
+
+            <div class="best-loading">
+                Բեռնվում է...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FLASH SALE
+    ====================================================== -->
+
+    <section class="flashHome">
+
+        <div class="flashHomeInner">
+
+            <div class="flashHomeContent">
+
+                <small>LIMITED OFFER / 2026</small>
+
+                <h2>Հատուկ առաջարկներ՝ ընտրված մոդելների համար։</h2>
+
+                <p>
+                    Բացահայտեք զեղչով մոդելները և գտեք Ձեր տան համար
+                    ճիշտ լուծումը։ Սահմանափակ քանակով առաջարկներ։
+                </p>
+
+                <a href="/shop" class="flashHomeButton">
+                    Դիտել առաջարկները →
+                </a>
+
+            </div>
+
+            <div class="flashHomeImage"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLECTION INTRO
+    ====================================================== -->
+
+    <section class="collectionIntro">
+
+        <div class="collectionIntroGrid">
+
+            <div>
+
+                <span class="collectionIntroLabel">
+                    TEVOSYAN COLLECTION
+                </span>
+
+                <h2 class="collectionIntroTitle">
+                    Ձեր տան
+                    <br>
+                    յուրաքանչյուր անկյունի համար։
+                </h2>
+
+            </div>
+
+
+            <p class="collectionIntroText">
+
+                Ընտրեք այն ոճը, որը համապատասխանում է
+                Ձեր տարածքին։ Ժամանակակից լուծումներ,
+                հարմարավետություն և գեղեցիկ դիզայն՝
+                մեկ հավաքածուում։
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLECTIONS
+    ====================================================== -->
+
+    <section
+        class="home-section collectionsHome"
+        id="collections"
+    >
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-overline">
+                    TEVOSYAN COLLECTION
+                </span>
+
+                <h2>
+
+                    Ընտրեք Ձեր
+
+                    <span>
+                        ոճը
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <a
+                href="/shop"
+                class="section-link"
+            >
+                Ամբողջ կատալոգը →
+            </a>
+
+        </div>
+
+
+        <div class="category-grid">
+
+
+            <a
+                href="/shop?category=Հյուրասենյակ"
+                class="category-card category-large"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1500&q=90"
+                    alt="Հյուրասենյակի կահույք"
+                    loading="lazy"
+                >
+
+                <div class="category-card-overlay"></div>
+
+
+                <div class="category-card-content">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        Հյուրասենյակ
+                    </h3>
+
+                    <p>
+                        Հարմարավետություն և ոճ
+                    </p>
+
+                    <b>
+                        Դիտել →
+                    </b>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="/shop?category=Խոհանոց"
+                class="category-card"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1300&q=90"
+                    alt="Խոհանոցի կահույք"
+                    loading="lazy"
+                >
+
+                <div class="category-card-overlay"></div>
+
+
+                <div class="category-card-content">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Խոհանոց
+                    </h3>
+
+                    <p>
+                        Ֆունկցիոնալ և գեղեցիկ
+                    </p>
+
+                    <b>
+                        Դիտել →
+                    </b>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="/shop?category=Ննջասենյակ"
+                class="category-card"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1300&q=90"
+                    alt="Ննջասենյակի կահույք"
+                    loading="lazy"
+                >
+
+                <div class="category-card-overlay"></div>
+
+
+                <div class="category-card-content">
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        Ննջասենյակ
+                    </h3>
+
+                    <p>
+                        Հանգստի նոր միջավայր
+                    </p>
+
+                    <b>
+                        Դիտել →
+                    </b>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="/shop?category=Պահեստավորում"
+                class="category-card"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1300&q=90"
+                    alt="Պահեստավորում"
+                    loading="lazy"
+                >
+
+                <div class="category-card-overlay"></div>
+
+
+                <div class="category-card-content">
+
+                    <span>
+                        04
+                    </span>
+
+                    <h3>
+                        Պահեստավորում
+                    </h3>
+
+                    <p>
+                        Ամեն ինչ իր տեղում
+                    </p>
+
+                    <b>
+                        Դիտել →
+                    </b>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HOW IT WORKS
+    ====================================================== -->
+
+    <section class="howHome">
+
+        <div class="howHomeHeader">
+            <small>HOW IT WORKS</small>
+            <h2>Պատվերը՝ պարզ ու հարմար քայլերով։</h2>
+            <p>
+                Ընտրեք ապրանքը, ուղարկեք պատվերը և մենք կապ կհաստատենք
+                Ձեզ հետ՝ մանրամասները հաստատելու համար։
+            </p>
+        </div>
+
+        <div class="howHomeGrid">
+
+            <div class="howHomeStep">
+                <div class="howHomeNumber">01 / CHOOSE</div>
+                <div class="howHomeIcon">⌕</div>
+                <h3>Ընտրեք ապրանքը</h3>
+                <p>Դիտեք մեր կատալոգը և գտեք Ձեր տան համար համապատասխան մոդելը։</p>
+            </div>
+
+            <div class="howHomeStep">
+                <div class="howHomeNumber">02 / CART</div>
+                <div class="howHomeIcon">□</div>
+                <h3>Ավելացրեք զամբյուղ</h3>
+                <p>Ընտրեք անհրաժեշտ քանակը և ավելացրեք ապրանքը զամբյուղ։</p>
+            </div>
+
+            <div class="howHomeStep">
+                <div class="howHomeNumber">03 / ORDER</div>
+                <div class="howHomeIcon">✓</div>
+                <h3>Կատարեք պատվերը</h3>
+                <p>Լրացրեք Ձեր տվյալները և ուղարկեք պատվերը առցանց։</p>
+            </div>
+
+            <div class="howHomeStep">
+                <div class="howHomeNumber">04 / CONTACT</div>
+                <div class="howHomeIcon">→</div>
+                <h3>Մենք կապ կհաստատենք</h3>
+                <p>Պատվերից հետո կապ կհաստատենք Ձեզ հետ հաստատման համար։</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROMO BANNER
+    ====================================================== -->
+
+    <section class="promoBanner">
+
+        <div class="promoBannerInner">
+
+            <div class="promoBannerImage"></div>
+
+            <div class="promoBannerOverlay"></div>
+
+
+            <div class="promoBannerContent">
+
+                <small>
+                    NEW COLLECTION
+                </small>
+
+
+                <h2>
+                    Ձեր տան
+                    նոր պատմությունը
+                    սկսվում է այստեղ։
+                </h2>
+
+
+                <p>
+
+                    Բացահայտեք մեր հավաքածուն և ընտրեք
+                    կահույք, որը ոչ միայն գեղեցիկ է,
+                    այլ նաև ստեղծված է ամենօրյա
+                    հարմարավետության համար։
+
+                </p>
+
+
+                <a
+                    href="/shop"
+                    class="promoButton"
+                >
+
+                    Դիտել հավաքածուն
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT / BRAND
+    ====================================================== -->
+
+    <section class="aboutHome">
+
+        <div class="aboutHomeGrid">
+
+            <div class="aboutHomeImage"></div>
+
+
+            <div class="aboutHomeContent">
+
+                <small>
+                    ABOUT TEVOSYAN FURNITURE
+                </small>
+
+
+                <h2>
+
+                    Կահույք, որը
+
+                    <span>
+                        ստեղծում է միջավայր։
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Մենք կարևորում ենք ոչ միայն
+                    գեղեցիկ տեսքը, այլ նաև
+                    հարմարավետությունը, որակը և
+                    յուրաքանչյուր դետալի ճիշտ համադրությունը։
+
+                </p>
+
+
+                <div class="aboutHomeLine"></div>
+
+
+                <div class="aboutHomeFacts">
+
+                    <div class="aboutHomeFact">
+
+                        <strong>
+                            15+
+                        </strong>
+
+                        <span>
+                            Ապրանքներ
+                        </span>
+
+                    </div>
+
+
+                    <div class="aboutHomeFact">
+
+                        <strong>
+                            5
+                        </strong>
+
+                        <span>
+                            Կատեգորիաներ
+                        </span>
+
+                    </div>
+
+
+                    <div class="aboutHomeFact">
+
+                        <strong>
+                            100%
+                        </strong>
+
+                        <span>
+                            Ուշադրություն
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="statsHome">
+
+        <div class="statsHomeInner">
+
+
+            <div class="statHome">
+
+                <div class="statHomeIcon">
+                    ♡
+                </div>
+
+                <strong>
+                    193+
+                </strong>
+
+                <span>
+                    Գոհ հաճախորդներ
+                </span>
+
+            </div>
+
+
+            <div class="statHome">
+
+                <div class="statHomeIcon">
+                    □
+                </div>
+
+                <strong>
+                    500+
+                </strong>
+
+                <span>
+                    Վաճառված ապրանքներ
+                </span>
+
+            </div>
+
+
+            <div class="statHome">
+
+                <div class="statHomeIcon">
+                    ★
+                </div>
+
+                <strong>
+                    5/5
+                </strong>
+
+                <span>
+                    Հաճախորդների գնահատական
+                </span>
+
+            </div>
+
+
+            <div class="statHome">
+
+                <div class="statHomeIcon">
+                    ⌖
+                </div>
+
+                <strong>
+                    Գորիս
+                </strong>
+
+                <span>
+                    Առաքում և սպասարկում
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INSPIRATION / INSTAGRAM STYLE
+    ====================================================== -->
+
+    <section class="inspirationHome">
+
+        <div class="inspirationHeading">
+
+            <div>
+
+                <small>
+                    INSPIRED BY TEVOSYAN
+                </small>
+
+                <h2>
+
+                    Գաղափարներ՝
+
+                    <span>
+                        Ձեր տան համար
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener"
+                class="instagramLink"
+            >
+                Հետևեք Instagram-ում →
+            </a>
+
+        </div>
+
+
+        <div class="inspirationGrid">
+
+
+            <a
+                href="/shop"
+                class="inspirationItem large"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1100&q=90"
+                    alt="Ժամանակակից ինտերիեր"
+                    loading="lazy"
+                >
+
+                <div class="inspirationItemOverlay"></div>
+
+                <div class="inspirationItemText">
+
+                    <small>
+                        LIVING
+                    </small>
+
+                    <strong>
+                        Ժամանակակից հյուրասենյակ
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="/shop"
+                class="inspirationItem"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=90"
+                    alt="Ննջասենյակ"
+                    loading="lazy"
+                >
+
+                <div class="inspirationItemOverlay"></div>
+
+                <div class="inspirationItemText">
+
+                    <small>
+                        BEDROOM
+                    </small>
+
+                    <strong>
+                        Հանգիստ տարածք
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="/shop"
+                class="inspirationItem"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=900&q=90"
+                    alt="Խոհանոց"
+                    loading="lazy"
+                >
+
+                <div class="inspirationItemOverlay"></div>
+
+                <div class="inspirationItemText">
+
+                    <small>
+                        KITCHEN
+                    </small>
+
+                    <strong>
+                        Ֆունկցիոնալ լուծումներ
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="/shop"
+                class="inspirationItem wide"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1300&q=90"
+                    alt="Հարմարավետ բազմոց"
+                    loading="lazy"
+                >
+
+                <div class="inspirationItemOverlay"></div>
+
+                <div class="inspirationItemText">
+
+                    <small>
+                        COMFORT
+                    </small>
+
+                    <strong>
+                        Հարմարավետություն՝ ամեն օր
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUOTE
+    ====================================================== -->
+
+    <section class="quoteHome">
+
+        <div class="quoteHomeInner">
+
+            <div class="quoteHomeContent">
+
+                <small>
+                    TEVOSYAN PHILOSOPHY
+                </small>
+
+
+                <blockquote>
+
+                    «Տունը պարզապես տարածք չէ։
+                    Այն այն զգացողությունն է,
+                    որը ստեղծում ենք ամեն օր»։
+
+                </blockquote>
+
+
+                <p>
+                    TEVOSYAN FURNITURE
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LOCATION
+    ====================================================== -->
+
+    <section class="locationHome" id="location">
+
+        <div class="locationHomeInner">
+
+            <div class="locationHomeContent">
+
+                <div class="locationHomeGlobe" aria-hidden="true">🌐</div>
+
+                <small>TEVOSYAN FURNITURE / LOCATION</small>
+
+                <h2>Գտեք մեզ Գորիսում։</h2>
+
+                <p>
+                    Ապրանքների ընտրության, պատվերի և խորհրդատվության համար
+                    կապվեք մեզ հետ։ Մենք պատրաստ ենք օգնել Ձեզ ընտրել ճիշտ
+                    կահույքը Ձեր տան համար։
+                </p>
+
+                <div class="locationHomeMeta">
+                    <span>📍 Գորիս, Հայաստան</span>
+                    <span>☎ 077 705 706</span>
+                </div>
+
+            </div>
+
+            <div class="locationHomeVisual"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
+
+    <section class="bigHomeCta">
+
+        <div class="bigHomeCtaInner">
+
+            <div class="bigHomeCtaImage"></div>
+
+            <div class="bigHomeCtaOverlay"></div>
+
+
+            <div class="bigHomeCtaContent">
+
+                <small>
+                    TEVOSYAN FURNITURE
+                </small>
+
+
+                <h2>
+                    Պատվիրեք հիմա
+                    և ստեղծեք Ձեր
+                    հարմարավետ միջավայրը։
+                </h2>
+
+
+                <p>
+
+                    Գտեք Ձեր տան համար համապատասխան
+                    կահույքը կամ կապվեք մեզ հետ՝
+                    ընտրության և պատվերի համար։
+
+                </p>
+
+
+                <div class="bigCtaButtons">
+
+                    <a
+                        href="/shop"
+                        class="bigCtaPrimary"
+                    >
+                        Դիտել ապրանքները →
+                    </a>
+
+
+                    <a
+                        href="tel:077705706"
+                        class="bigCtaSecondary"
+                    >
+                        077 705 706
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LARGE FOOTER
+    ====================================================== -->
+
+    
+
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script
+    src="{{ url_for('static', filename='js/main.js') }}"
+></script>
+
+<script
+    src="{{ url_for('static', filename='js/home.js') }}"
+></script>
+
+{% endblock %}

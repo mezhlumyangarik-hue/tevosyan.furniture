@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Զամբյուղ — TEVOSYAN FURNITURE{% endblock %}
+
+{% block content %}
+
+<section class="pageHero cartHero">
+    <div>
+        <span class="eyebrow">YOUR SELECTION</span>
+        <h1>Զամբյուղ</h1>
+        <p>Ձեր ընտրած ապրանքները մեկ վայրում։</p>
+    </div>
+</section>
+
+<section class="cartSection">
+    <div id="cartItems" class="cartItems"></div>
+
+    <aside class="cartSummary">
+        <span class="eyebrow">
+            ORDER SUMMARY
+        </span>
+
+        <h2>
+            Պատվերի ամփոփում
+        </h2>
+
+        <div class="summaryRow">
+            <span>Ապրանքներ</span>
+            <strong id="cartSubtotal">0 ֏</strong>
+        </div>
+
+        <div class="summaryRow">
+            <span>Առաքում</span>
+            <strong>Պայմանավորված</strong>
+        </div>
+
+        <div class="summaryTotal">
+            <span>Ընդհանուր</span>
+            <strong id="cartTotal">0 ֏</strong>
+        </div>
+
+        <button
+            id="checkoutButton"
+            class="button buttonDark fullButton"
+        >
+            Պատվիրել →
+        </button>
+
+        <a
+            href="{{ url_for('shop') }}"
+            class="continueShopping"
+        >
+            ← Շարունակել գնումները
+        </a>
+    </aside>
+</section>
+
+<div id="checkoutModal" class="modal">
+    <div class="modalBox">
+        <button
+            id="closeCheckout"
+            class="modalClose"
+        >
+            ×
+        </button>
+
+        <span class="eyebrow">
+            CHECKOUT
+        </span>
+
+        <h2>
+            Պատվերի տվյալները
+        </h2>
+
+        <p>
+            Լրացրեք տվյալները, և մենք կապ կհաստատենք ձեզ հետ։
+        </p>
+
+        <form id="checkoutForm">
+            <label>
+                Անուն / Անվանում
+                <input
+                    type="text"
+                    id="customerName"
+                    name="customer_name"
+                    required
+                    placeholder="Ձեր անունը"
+                >
+            </label>
+
+            <label>
+                Հեռախոսահամար
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    name="phone"
+                    required
+                    placeholder="077 00 00 00"
+                >
+            </label>
+
+            <label>
+                Հասցե
+                <textarea
+                    id="customerAddress"
+                    name="address"
+                    required
+                    placeholder="Առաքման հասցե"
+                ></textarea>
+            </label>
+
+            <label>
+                Մեկնաբանություն (կամընտիր)
+                <textarea
+                    id="customerComment"
+                    name="comment"
+                    placeholder="Լրացուցիչ նշումներ պատվերի վերաբերյալ"
+                ></textarea>
+            </label>
+
+            <button
+                type="submit"
+                class="button buttonDark fullButton"
+            >
+                Հաստատել պատվերը
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script
+    src="{{ url_for('static', filename='js/cart.js') }}"
+></script>
+{% endblock %}

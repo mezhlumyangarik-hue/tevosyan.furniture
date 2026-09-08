@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel — TEVOSYAN FURNITURE{% endblock %}
+
+{% block content %}
+<style>
+:root{--adm-bg:#f6f4ef;--adm-card:#fff;--adm-ink:#161616;--adm-muted:#777;--adm-line:#e9e5dc;--adm-gold:#b68a43;--adm-dark:#181714;--adm-red:#b42318;}
+.admin-page{min-height:100vh;background:var(--adm-bg);padding:26px 18px 44px}
+.admin-shell{max-width:1380px;margin:0 auto}
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+.admin-brand{display:flex;align-items:center;gap:12px}.admin-brand-mark{width:44px;height:44px;border-radius:14px;background:var(--adm-dark);color:#fff;display:grid;place-items:center;font-weight:800;letter-spacing:.08em}.admin-brand h1{margin:0;font-size:22px}.admin-brand p{margin:3px 0 0;color:var(--adm-muted);font-size:12px}
+.admin-actions{display:flex;gap:9px;flex-wrap:wrap}.adm-btn{border:1px solid var(--adm-line);background:#fff;color:var(--adm-ink);border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px}.adm-btn.primary{background:var(--adm-dark);color:#fff;border-color:var(--adm-dark)}.adm-btn:hover{transform:translateY(-1px)}
+.stats-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:18px}.stat-card{background:var(--adm-card);border:1px solid var(--adm-line);border-radius:18px;padding:15px;box-shadow:0 7px 20px rgba(18,18,18,.035)}.stat-card small{color:var(--adm-muted);font-size:11px}.stat-card strong{display:block;font-size:25px;margin-top:7px}.stat-icon{font-size:18px;opacity:.8}
+.admin-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}.admin-card{background:var(--adm-card);border:1px solid var(--adm-line);border-radius:20px;box-shadow:0 10px 25px rgba(18,18,18,.045);overflow:hidden}.card-head{padding:16px 18px;border-bottom:1px solid var(--adm-line);display:flex;align-items:center;justify-content:space-between;gap:12px}.card-head h2{margin:0;font-size:17px}.card-head p{margin:3px 0 0;color:var(--adm-muted);font-size:11px}.search-wrap{padding:12px 14px;border-bottom:1px solid var(--adm-line)}.adm-search{width:100%;box-sizing:border-box;border:1px solid var(--adm-line);background:#faf9f6;border-radius:11px;padding:10px 12px;font:inherit;outline:none}.adm-search:focus{border-color:#cdb78d;box-shadow:0 0 0 3px rgba(182,138,67,.1)}
+.table-scroll{overflow:auto}.admin-table{width:100%;border-collapse:collapse;min-width:620px}.admin-table th,.admin-table td{border-bottom:1px solid #f0ede7;text-align:left}.admin-table th{padding:8px 10px;color:#8a857b;font-size:10px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:#fcfbf8}.admin-table td{padding:7px 10px;font-size:12px;vertical-align:middle}.admin-table tr:last-child td{border-bottom:0}.admin-table tbody tr:hover{background:#fcfbf8}
+#productsTableBody tr{height:54px}.product-admin{display:flex;align-items:center;gap:9px;min-width:200px}.product-admin img,.product-thumb{width:38px!important;height:38px!important;object-fit:cover!important;border-radius:8px!important;flex:none!important;background:#eee}.product-admin-name{font-weight:700;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:230px}.product-admin-category{font-size:10px;color:#8a857b;margin-top:2px}.mini-id{font-size:10px;color:#aaa}
+.stock-pill,.status-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:700;white-space:nowrap}.stock-ok{background:#eef7ef;color:#29743b}.stock-low{background:#fff3df;color:#9a6211}.stock-out{background:#fdebea;color:#b42318}
+.row-actions{display:flex;gap:5px;justify-content:flex-end}.icon-btn{width:31px;height:31px;border:1px solid var(--adm-line);background:#fff;border-radius:9px;cursor:pointer;display:grid;place-items:center}.icon-btn:hover{background:#f8f6f0}.icon-btn.delete{color:var(--adm-red)}
+.orders-card{grid-column:1/-1}.order-items{max-width:270px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.order-status{border:1px solid var(--adm-line);border-radius:9px;background:#fff;padding:7px 8px;font:inherit;font-size:11px;max-width:150px}.order-view{border:0;background:#181714;color:#fff;border-radius:9px;padding:7px 10px;font-size:11px;cursor:pointer}
+.empty-state{text-align:center!important;color:#8a857b;padding:28px!important}
+#productModal{position:fixed;inset:0;background:rgba(12,11,9,.58);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999;backdrop-filter:blur(7px)}#productModal.active{display:flex!important}.modal-box{width:min(820px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;border:1px solid #e7e0d4;box-shadow:0 25px 70px rgba(0,0,0,.23)}.modal-head{position:sticky;top:0;background:#fff;z-index:2;padding:17px 19px;border-bottom:1px solid var(--adm-line);display:flex;align-items:center;justify-content:space-between}.modal-head h3{margin:0;font-size:18px}.close-x{width:35px;height:35px;border-radius:10px;border:1px solid var(--adm-line);background:#fff;cursor:pointer;font-size:18px}.modal-body{padding:18px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:11px;font-weight:700;margin-bottom:6px;color:#57534b}.field input,.field textarea,.field select{width:100%;box-sizing:border-box;border:1px solid var(--adm-line);border-radius:11px;padding:10px 11px;font:inherit;background:#fbfaf7;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:#cdb78d;box-shadow:0 0 0 3px rgba(182,138,67,.1)}.field.full{grid-column:1/-1}.field textarea{min-height:100px;resize:vertical}.modal-foot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px}.hint{color:#999;font-size:10px;margin-top:4px}
+@media(max-width:1050px){.stats-grid{grid-template-columns:repeat(3,1fr)}.admin-grid{grid-template-columns:1fr}.orders-card{grid-column:auto}}
+@media(max-width:700px){.admin-page{padding:14px 10px 30px}.admin-top{align-items:flex-start;flex-direction:column}.admin-actions{width:100%}.admin-actions .adm-btn{flex:1}.stats-grid{grid-template-columns:repeat(2,1fr);gap:8px}.stat-card{border-radius:14px;padding:12px}.stat-card strong{font-size:21px}.card-head{align-items:flex-start;flex-direction:column}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal-box{border-radius:18px}.admin-table{min-width:690px}.orders-card .admin-table{min-width:860px}}
+@media(max-width:430px){.stats-grid{grid-template-columns:1fr 1fr}.stat-card strong{font-size:19px}.admin-brand h1{font-size:18px}}
+</style>
+
+<section class="admin-page">
+  <div class="admin-shell">
+    <div class="admin-top">
+      <div class="admin-brand">
+        <div class="admin-brand-mark">TF</div>
+        <div><h1>TEVOSYAN FURNITURE</h1><p>Կառավարման վահանակ · Admin Panel</p></div>
+      </div>
+      <div class="admin-actions">
+        <a class="adm-btn" href="/">← Գլխավոր</a>
+        <a class="adm-btn" href="/shop">Խանութ</a>
+        <button class="adm-btn primary" id="addProductBtn" type="button">＋ Ավելացնել ապրանք</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><span class="stat-icon">🪑</span><small>Ապրանքներ</small><strong id="statProducts">—</strong></div>
+      <div class="stat-card"><span class="stat-icon">🛒</span><small>Պատվերներ</small><strong id="statOrders">—</strong></div>
+      <div class="stat-card"><span class="stat-icon">⏳</span><small>Ընթացիկ</small><strong id="statPending">—</strong></div>
+      <div class="stat-card"><span class="stat-icon">֏</span><small>Եկամուտ</small><strong id="statRevenue">—</strong></div>
+      <div class="stat-card"><span class="stat-icon">⚠️</span><small>Քիչ մնացած</small><strong id="statLowStock">—</strong></div>
+    </div>
+
+    <div class="admin-grid">
+      <section class="admin-card">
+        <div class="card-head"><div><h2>Ապրանքներ</h2><p>Կոմպակտ ցանկ · ավելացնել, խմբագրել կամ ջնջել</p></div></div>
+        <div class="search-wrap"><input id="adminProductSearch" class="adm-search" type="search" placeholder="🔎 Փնտրել անունով կամ կատեգորիայով…"></div>
+        <div class="table-scroll">
+          <table class="admin-table"><thead><tr><th>Ապրանք</th><th>Կատ.</th><th>Գին</th><th>Պահեստ</th><th></th></tr></thead><tbody id="productsTableBody"></tbody></table>
+        </div>
+      </section>
+
+      <section class="admin-card">
+        <div class="card-head"><div><h2>Պատվերներ</h2><p>Փնտրել և փոխել կարգավիճակը</p></div></div>
+        <div class="search-wrap"><input id="adminOrderSearch" class="adm-search" type="search" placeholder="🔎 #համար / անուն / հեռախոս…"></div>
+        <div class="table-scroll">
+          <table class="admin-table"><thead><tr><th>#</th><th>Հաճախորդ</th><th>Ապրանքներ</th><th>Ընդհանուր</th><th>Կարգավ.</th><th>Ամսաթիվ</th><th></th></tr></thead><tbody id="ordersTableBody"></tbody></table>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<div id="productModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+    <div class="modal-head"><h3 id="productModalTitle">Ավելացնել ապրանք</h3><button class="close-x" id="closeProductModal" type="button">×</button></div>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field"><label for="productName">Անուն *</label><input id="productName" required placeholder="Օր․ Modern Comfort Բազմոց"></div>
+          <div class="field"><label for="productCategory">Կատեգորիա *</label><select id="productCategory" required><option value="">Ընտրել…</option><option>Հյուրասենյակ</option><option>Ննջասենյակ</option><option>Խոհանոց</option><option>Մանկական</option><option>Գրասենյակ</option><option>Սեղաններ</option><option>Պահարաններ</option><option>Աքսեսուարներ</option></select></div>
+          <div class="field"><label for="productBadge">Badge</label><input id="productBadge" placeholder="Նոր / Sale / Bestseller"></div>
+          <div class="field"><label for="productImage">Հիմնական նկարի URL *</label><input id="productImage" placeholder="https://…"></div>
+          <div class="field"><label for="productPrice">Գին *</label><input id="productPrice" type="number" min="0" step="1" required></div>
+          <div class="field"><label for="productOldPrice">Հին գին</label><input id="productOldPrice" type="number" min="0" step="1"></div>
+          <div class="field"><label for="productStock">Քանակ</label><input id="productStock" type="number" min="0" step="1" value="0"></div>
+          <div class="field"><label for="productRating">Գնահատական</label><input id="productRating" type="number" min="0" max="5" step="0.1" value="5"></div>
+          <div class="field"><label for="productReviews">Կարծիքների քանակ</label><input id="productReviews" type="number" min="0" step="1" value="0"></div>
+          <div class="field"><label for="productGallery">Gallery</label><textarea id="productGallery" placeholder="Յուրաքանչյուր URL-ը նոր տողում"></textarea><div class="hint">Մի քանի նկար՝ մեկ URL մեկ տողում</div></div>
+          <div class="field full"><label for="productDescription">Նկարագրություն</label><textarea id="productDescription" placeholder="Կարճ և վաճառող նկարագրություն…"></textarea></div>
+          <div class="field full"><label for="productDetails">Մանրամասներ</label><textarea id="productDetails" placeholder="Չափսեր, նյութեր, գույներ և այլն…"></textarea></div>
+        </div>
+        <div class="modal-foot"><button class="adm-btn" id="cancelProductBtn" type="button">Չեղարկել</button><button class="adm-btn primary" type="submit">Պահպանել ապրանքը</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

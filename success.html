@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Պատվերը ընդունված է — TEVOSYAN FURNITURE{% endblock %}
+
+{% block content %}
+
+<section class="successPage">
+
+    <div class="successIcon">
+        ✓
+    </div>
+
+    <span class="eyebrow">
+        ORDER CONFIRMED
+    </span>
+
+    <h1>
+        Պատվերը ընդունված է
+    </h1>
+
+    <p>
+        Շնորհակալություն։ Մեր մասնագետը
+        շուտով կապ կհաստատի Ձեզ հետ։
+    </p>
+
+    <a
+        href="{{ url_for('home') }}"
+        class="button buttonDark"
+    >
+        Վերադառնալ գլխավոր էջ →
+    </a>
+
+</section>
+
+{% endblock %}

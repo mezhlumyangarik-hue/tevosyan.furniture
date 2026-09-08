@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}Կատալոգ — TEVOSYAN FURNITURE{% endblock %}
+
+{% block content %}
+
+<!-- =========================
+     PAGE INTRO
+========================= -->
+
+<section class="catalogIntro">
+    <div class="catalogIntroInner">
+
+        <div>
+            <span class="catalogMiniTitle">
+                TEVOSYAN FURNITURE / 2026
+            </span>
+
+            <h1>
+                Ընտրեք ձեր<br>
+                <span>իդեալական կահույքը</span>
+            </h1>
+
+            <p>
+                Ժամանակակից դիզայն, բարձր որակ
+                և հարմարավետություն ձեր տան համար։
+            </p>
+        </div>
+
+        <div class="catalogNumber">
+            <span>COLLECTION</span>
+            <strong>01</strong>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+<!-- =========================
+     CATALOG
+========================= -->
+
+<section
+    id="catalog"
+    class="catalogSection"
+>
+
+    <aside class="catalogSidebar">
+
+        <div class="sidebarTitle">
+            <span>ԿԱՏԱԼՈԳ</span>
+        </div>
+
+
+        <div class="categoryList">
+
+            <button
+                class="categoryFilter active"
+                data-category=""
+            >
+                <span>Բոլորը</span>
+                <small>15</small>
+            </button>
+
+
+            <button
+                class="categoryFilter"
+                data-category="Հյուրասենյակ"
+            >
+                <span>Հյուրասենյակ</span>
+                <small>01</small>
+            </button>
+
+
+            <button
+                class="categoryFilter"
+                data-category="Ննջասենյակ"
+            >
+                <span>Ննջասենյակ</span>
+                <small>02</small>
+            </button>
+
+
+            <button
+                class="categoryFilter"
+                data-category="Խոհանոց"
+            >
+                <span>Խոհանոց</span>
+                <small>03</small>
+            </button>
+
+
+            <button
+                class="categoryFilter"
+                data-category="Պահեստավորում"
+            >
+                <span>Պահեստավորում</span>
+                <small>04</small>
+            </button>
+
+
+            <button
+                class="categoryFilter"
+                data-category="Աքսեսուարներ"
+            >
+                <span>Աքսեսուարներ</span>
+                <small>05</small>
+            </button>
+
+        </div>
+
+
+        <div class="sidebarBrand">
+
+            <span>TEVOSYAN</span>
+
+            <strong>
+                FURNITURE
+            </strong>
+
+            <p>
+                Կահույք, որը ստեղծված է
+                ժամանակակից տան համար։
+            </p>
+
+        </div>
+
+    </aside>
+
+
+    <main class="catalogMain">
+
+        <div class="catalogToolbar">
+
+            <div class="productsTotal">
+                <span>PRODUCTS</span>
+
+                <strong id="shopCount">
+                    0
+                </strong>
+            </div>
+
+
+            <div class="catalogTools">
+
+                <div class="catalogSearch">
+
+                    <span>⌕</span>
+
+                    <input
+                        id="shopSearch"
+                        type="text"
+                        placeholder="Որոնել ապրանք..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <select
+                    id="sortProducts"
+                >
+                    <option value="default">
+                        Դասավորել
+                    </option>
+
+                    <option value="price-low">
+                        Գին՝ աճող
+                    </option>
+
+                    <option value="price-high">
+                        Գին՝ նվազող
+                    </option>
+
+                    <option value="rating">
+                        Բարձր գնահատական
+                    </option>
+
+                    <option value="new">
+                        Նոր ապրանքներ
+                    </option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div id="shopStatus"></div>
+
+
+        <div
+            id="shopGrid"
+            class="premiumProductGrid"
+        ></div>
+
+    </main>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shop.js') }}"></script>
+
+{% endblock %}
