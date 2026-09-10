@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+<link
+    rel="icon"
+    type="image/svg+xml"
+    href="{{ url_for('static', filename='images/favicon.svg') }}"
+>
+
+<link
+    rel="icon"
+    href="{{ url_for('static', filename='images/favicon.svg') }}"
+>
+
+<link
+    rel="apple-touch-icon"
+    href="{{ url_for('static', filename='images/favicon.svg') }}"
+>
+    <title>
+        {% block title %}
+        TEVOSYAN FURNITURE
+        {% endblock %}
+    </title>
+
+    <meta
+        name="description"
+        content="TEVOSYAN FURNITURE — ժամանակակից կահույք Հայաստանում"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    {% block head %}{% endblock %}
+
+</head>
+
+<body>
+
+    <div id="pageLoader">
+        <div class="loaderLogo">
+            TEVOSYAN
+        </div>
+    </div>
+
+
+    <div class="topBar">
+
+        <div>
+            GORIS · HAYASTAN
+        </div>
+
+        <div>
+            Անվճար խորհրդատվություն
+        </div>
+
+        <a href="tel:077705706">
+            077 705 706
+        </a>
+
+    </div>
+
+
+    <header class="header">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="logo"
+        >
+            <span>TEVOSYAN</span>
+            <small>FURNITURE</small>
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="{{ url_for('home') }}">
+                Գլխավոր
+            </a>
+
+            <a href="{{ url_for('shop') }}">
+                Կատալոգ
+            </a>
+
+            <a href="{{ url_for('shop') }}?category=Հյուրասենյակ">
+                Հյուրասենյակ
+            </a>
+
+            <a href="{{ url_for('shop') }}?category=Ննջասենյակ">
+                Ննջասենյակ
+            </a>
+
+            <a href="{{ url_for('admin') }}">
+                Պատվերներ
+            </a>
+
+        </nav>
+
+
+        <div class="headerActions">
+
+            <button
+                class="iconButton"
+                id="searchButton"
+                aria-label="Որոնում"
+            >
+                ⌕
+            </button>
+
+            <a
+                href="{{ url_for('cart') }}"
+                class="cartButton"
+            >
+                Զամբյուղ
+                <span id="cartCount">0</span>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <div
+        class="searchOverlay"
+        id="searchOverlay"
+    >
+
+        <button
+            id="closeSearch"
+            class="closeSearch"
+        >
+            ×
+        </button>
+
+        <div class="searchBox">
+
+            <span>⌕</span>
+
+            <input
+                id="globalSearch"
+                type="text"
+                placeholder="Փնտրել կահույք..."
+            >
+
+        </div>
+
+    </div>
+
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    
+ <footer class="homeFooter">
+
+        <div class="homeFooterTop">
+
+            <div class="homeFooterBrand">
+
+                <h2>TEVOSYAN</h2>
+                <span>FURNITURE</span>
+
+                <p>
+                    Ժամանակակից և որակյալ կահույք՝ Ձեր տան
+                    հարմարավետության ու գեղեցիկ միջավայրի համար։
+                </p>
+
+                <div class="homeFooterSocials">
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="tel:077705706" aria-label="Phone">☎</a>
+                </div>
+
+                <a href="/admin" class="adminQuick">
+                    ⚙ Կառավարման վահանակ
+                </a>
+
+            </div>
+
+
+            <div class="homeFooterColumn">
+                <h3>ԿԱՅՔ</h3>
+                <a href="/">Գլխավոր</a>
+                <a href="/shop">Կատալոգ</a>
+                <a href="#best-sellers">Լավագույններ</a>
+                <a href="#collections">Հավաքածուներ</a>
+                <a href="#contact">Կապ</a>
+            </div>
+
+
+            <div class="homeFooterColumn">
+                <h3>ԿԱՏԵԳՈՐԻԱՆԵՐ</h3>
+                <a href="/shop?category=Հյուրասենյակ">Հյուրասենյակ</a>
+                <a href="/shop?category=Ննջասենյակ">Ննջասենյակ</a>
+                <a href="/shop?category=Խոհանոց">Խոհանոց</a>
+                <a href="/shop?category=Պահեստավորում">Պահեստավորում</a>
+                <a href="/shop?category=Աքսեսուարներ">Աքսեսուարներ</a>
+            </div>
+
+
+            <div class="homeFooterColumn">
+                <h3>ԿԱՊ</h3>
+                <a href="tel:077705706">077 705 706</a>
+                <a href="#location">Գորիս, Հայաստան</a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+                <a href="mailto:info@tevosyanfurniture.am">Էլ․ փոստ</a>
+            </div>
+
+        </div>
+
+
+        <div class="homeFooterContact" id="contact">
+
+            <div class="homeFooterContactItem">
+                <small>ՀԵՌԱԽՈՍ</small>
+                <a href="tel:077705706">077 705 706</a>
+            </div>
+
+            <div class="homeFooterContactItem">
+                <small>ՏԵՂԱԴՐՈՒԹՅՈՒՆ</small>
+                <strong>🌐 Գորիս, Հայաստան</strong>
+            </div>
+
+            <div class="homeFooterContactItem">
+                <small>ՊԱՏՎԵՐՆԵՐ</small>
+                <strong>Առցանց և հեռախոսով</strong>
+            </div>
+
+        </div>
+
+
+        <div class="homeFooterBottom">
+            <span>© 2026 TEVOSYAN FURNITURE. Բոլոր իրավունքները պաշտպանված են։</span>
+            <strong>MADE WITH CARE</strong>
+        </div>
+
+    </footer>
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

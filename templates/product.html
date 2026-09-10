@@ -1,0 +1,1431 @@
+{% extends "base.html" %}
+
+{% block title %}Ապրանք — TEVOSYAN FURNITURE{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   PRODUCT PAGE — PREMIUM LAYOUT
+========================================================= */
+
+.productPage {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 55px 42px 100px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(420px, .92fr);
+    gap: 70px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.productGallery {
+    min-width: 0;
+}
+
+.mainProductImage {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+    background: #f0ece6;
+    border-radius: 28px;
+}
+
+.mainProductImage img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.mainProductImage:hover img {
+    transform: scale(1.025);
+}
+
+.mainProductImage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.03),
+            transparent 35%,
+            rgba(0,0,0,.05)
+        );
+}
+
+.productThumbnails {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.productThumbnails button {
+    width: 100%;
+    height: 105px;
+    padding: 0;
+    border: 1px solid #ded8cf;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f3eee8;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.productThumbnails button:hover {
+    transform: translateY(-3px);
+    border-color: #999188;
+}
+
+.productThumbnails button.active {
+    border: 2px solid #111;
+}
+
+.productThumbnails img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.productInfo {
+    padding: 15px 0 0;
+}
+
+.productBadge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    margin-bottom: 16px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+}
+
+.productInfo .eyebrow {
+    display: block;
+    margin-bottom: 17px;
+    color: #918b82;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+#productName {
+    margin: 0;
+    max-width: 650px;
+    color: #111;
+    font-size: clamp(42px, 4.3vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    font-weight: 700;
+}
+
+.productRating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 20px;
+    color: #777169;
+    font-size: 13px;
+}
+
+#productStars {
+    color: #111;
+    font-size: 19px;
+    letter-spacing: 2px;
+}
+
+#productReviews {
+    color: #6f6962;
+}
+
+.productPrices {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 29px;
+}
+
+#productPrice {
+    color: #111;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -.025em;
+}
+
+#productOldPrice {
+    color: #999188;
+    font-size: 17px;
+}
+
+.productDescription {
+    max-width: 650px;
+    margin: 28px 0 0;
+    color: #6e6961;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   COLOR
+========================================================= */
+
+.productOption {
+    margin-top: 32px;
+    padding-top: 25px;
+    border-top: 1px solid #e3ddd5;
+}
+
+.productOption > span {
+    display: block;
+    margin-bottom: 14px;
+    color: #282622;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.colorOptions {
+    display: flex;
+    gap: 10px;
+    min-height: 35px;
+}
+
+
+/* =========================================================
+   PURCHASE
+========================================================= */
+
+.productPurchase {
+    display: grid;
+    grid-template-columns: 145px 1fr;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.quantity {
+    height: 62px;
+    display: grid;
+    grid-template-columns: 45px 1fr 45px;
+    align-items: center;
+    border: 1px solid #d8d1c9;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.quantity button {
+    height: 100%;
+    border: 0;
+    background: transparent;
+    color: #111;
+    cursor: pointer;
+    font-size: 22px;
+    transition: .25s ease;
+}
+
+.quantity button:hover {
+    background: #f1ede7;
+}
+
+.quantity span {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    border-left: 1px solid #e2ddd5;
+    border-right: 1px solid #e2ddd5;
+    color: #111;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.buttonDark {
+    min-height: 62px;
+    padding: 0 25px;
+    border: 1px solid #111;
+    border-radius: 15px;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 800;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.buttonDark:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 17px 35px rgba(0,0,0,.16);
+}
+
+.buttonDark span {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 50%;
+    transition: .25s ease;
+}
+
+.buttonDark:hover span {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.productBenefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.productBenefits > div {
+    min-height: 95px;
+    padding: 16px;
+    border: 1px solid #e2dcd4;
+    border-radius: 15px;
+    background: #faf8f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.productBenefits strong {
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 12px;
+}
+
+.productBenefits span {
+    color: #403c36;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   LONG INFO SECTION
+========================================================= */
+
+.productLongSection {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 42px 110px;
+}
+
+.productLongInner {
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 70px;
+    padding: 65px 0;
+    border-top: 1px solid #dfd9d1;
+    border-bottom: 1px solid #dfd9d1;
+}
+
+.productLongLabel {
+    color: #918a81;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.productLongTitle {
+    margin: 13px 0 0;
+    color: #111;
+    font-size: clamp(34px, 4vw, 58px);
+    line-height: 1.03;
+    letter-spacing: -.04em;
+}
+
+.productLongContent {
+    color: #6b655d;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.productLongContent p {
+    margin: 0 0 25px;
+}
+
+
+/* =========================================================
+   SPECIFICATIONS
+========================================================= */
+
+.productSpecs {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 42px 110px;
+}
+
+.productSpecsHeader {
+    margin-bottom: 35px;
+}
+
+.productSpecsHeader span {
+    color: #918a81;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+}
+
+.productSpecsHeader h2 {
+    margin: 12px 0 0;
+    color: #111;
+    font-size: 38px;
+    letter-spacing: -.035em;
+}
+
+.productSpecsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid #ded8cf;
+    border-left: 1px solid #ded8cf;
+}
+
+.productSpec {
+    min-height: 130px;
+    padding: 22px;
+    border-right: 1px solid #ded8cf;
+    border-bottom: 1px solid #ded8cf;
+    background: #faf8f4;
+}
+
+.productSpec small {
+    display: block;
+    margin-bottom: 13px;
+    color: #938d84;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+.productSpec strong {
+    color: #181714;
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   RELATED PRODUCTS
+========================================================= */
+
+.relatedProducts {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 42px 120px;
+}
+
+.relatedHeader {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 32px;
+}
+
+.relatedHeader small {
+    color: #918a81;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+}
+
+.relatedHeader h2 {
+    margin: 11px 0 0;
+    color: #111;
+    font-size: clamp(34px, 4vw, 52px);
+    letter-spacing: -.04em;
+}
+
+.relatedLink {
+    color: #111;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.relatedGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.relatedCard {
+    overflow: hidden;
+    border-radius: 20px;
+    background: #f2eee8;
+    transition: transform .35s ease;
+}
+
+.relatedCard:hover {
+    transform: translateY(-7px);
+}
+
+.relatedCardImage {
+    height: 330px;
+    overflow: hidden;
+}
+
+.relatedCardImage img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .6s ease;
+}
+
+.relatedCard:hover img {
+    transform: scale(1.04);
+}
+
+.relatedCardBody {
+    padding: 20px;
+    background: #fff;
+}
+
+.relatedCardCategory {
+    color: #918a81;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+}
+
+.relatedCardBody h3 {
+    margin: 8px 0 13px;
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.relatedCardBody h3 a {
+    color: #111;
+    text-decoration: none;
+}
+
+.relatedCardPrice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.relatedCardPrice strong {
+    color: #111;
+    font-size: 17px;
+}
+
+.relatedCardPrice del {
+    color: #9c968d;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LARGE CTA
+========================================================= */
+
+.productFinalCta {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 42px 120px;
+}
+
+.productFinalCtaInner {
+    position: relative;
+    min-height: 350px;
+    overflow: hidden;
+    border-radius: 28px;
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,255,255,.14),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #181715,
+            #2b2925
+        );
+}
+
+.productFinalCtaInner::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    right: -180px;
+    bottom: -290px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.05);
+}
+
+.productFinalCtaContent {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    padding: 70px;
+}
+
+.productFinalCtaContent small {
+    color: #afa8a0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .17em;
+}
+
+.productFinalCtaContent h2 {
+    margin: 14px 0 18px;
+    color: #fff;
+    font-size: clamp(34px, 4vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -.045em;
+}
+
+.productFinalCtaContent p {
+    margin: 0 0 28px;
+    color: #b8b2a9;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.productFinalCtaContent a {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 50px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    transition: .3s ease;
+}
+
+.productFinalCtaContent a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(0,0,0,.25);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .productPage {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .mainProductImage {
+        height: min(75vw, 650px);
+    }
+
+    .productInfo {
+        padding-top: 0;
+    }
+
+    .productSpecsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .relatedGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .productPage {
+        padding:
+            30px
+            16px
+            75px;
+
+        gap: 38px;
+    }
+
+    .mainProductImage {
+        height: 430px;
+        border-radius: 20px;
+    }
+
+    .productThumbnails {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .productThumbnails button {
+        height: 72px;
+        border-radius: 10px;
+    }
+
+    .productThumbnails button:nth-child(n+5) {
+        display: none;
+    }
+
+    #productName {
+        font-size: 39px;
+    }
+
+    #productPrice {
+        font-size: 30px;
+    }
+
+    .productPurchase {
+        grid-template-columns: 1fr;
+    }
+
+    .productBenefits {
+        grid-template-columns: 1fr;
+    }
+
+    .productLongSection,
+    .productSpecs,
+    .relatedProducts,
+    .productFinalCta {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .productLongInner {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 45px 0;
+    }
+
+    .productSpecsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .relatedHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .relatedGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .relatedCardImage {
+        height: 330px;
+    }
+
+    .productFinalCtaInner {
+        border-radius: 21px;
+    }
+
+    .productFinalCtaContent {
+        padding: 42px 26px;
+    }
+}
+
+
+@media (max-width: 420px) {
+
+    .mainProductImage {
+        height: 370px;
+    }
+
+    #productName {
+        font-size: 34px;
+    }
+}
+
+</style>
+
+
+<!-- =========================================================
+     MAIN PRODUCT
+========================================================= -->
+
+<section
+    class="productPage"
+    data-product-id="{{ product_id }}"
+>
+
+    <!-- =====================================================
+         GALLERY
+    ====================================================== -->
+
+    <div class="productGallery">
+
+        <div class="mainProductImage">
+
+            <img
+                id="productMainImage"
+                src=""
+                alt="Product"
+            >
+
+        </div>
+
+
+        <div
+            id="productThumbnails"
+            class="productThumbnails"
+        ></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PRODUCT INFO
+    ====================================================== -->
+
+    <div class="productInfo">
+
+        <span
+            id="productBadge"
+            class="productBadge"
+        ></span>
+
+
+        <span
+            id="productCategory"
+            class="eyebrow"
+        ></span>
+
+
+        <h1 id="productName">
+            Բեռնվում է...
+        </h1>
+
+
+        <div class="productRating">
+
+            <span id="productStars">
+                ☆☆☆☆☆
+            </span>
+
+            <span id="productReviews">
+                0 կարծիք
+            </span>
+
+        </div>
+
+
+        <div class="productPrices">
+
+            <strong id="productPrice">
+                0 ֏
+            </strong>
+
+            <del id="productOldPrice"></del>
+
+        </div>
+
+
+        <p
+            id="productDescription"
+            class="productDescription"
+        >
+            Բեռնվում է...
+        </p>
+
+
+        <!-- COLOR -->
+
+        <div class="productOption">
+
+            <span>
+                Գույն
+            </span>
+
+            <div
+                id="productColors"
+                class="colorOptions"
+            ></div>
+
+        </div>
+
+
+        <!-- PURCHASE -->
+
+        <div class="productPurchase">
+
+            <div class="quantity">
+
+                <button
+                    type="button"
+                    id="minusQty"
+                    aria-label="Նվազեցնել"
+                >
+                    −
+                </button>
+
+
+                <span id="productQty">
+                    1
+                </span>
+
+
+                <button
+                    type="button"
+                    id="plusQty"
+                    aria-label="Ավելացնել"
+                >
+                    +
+                </button>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="addProduct"
+                class="button buttonDark"
+            >
+
+                <span>
+                    Ավելացնել զամբյուղ
+                </span>
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- BENEFITS -->
+
+        <div class="productBenefits">
+
+            <div>
+
+                <strong>
+                    ✓
+                </strong>
+
+                <span>
+                    Որակյալ նյութեր
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    ✓
+                </strong>
+
+                <span>
+                    Անվճար խորհրդատվություն
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    ✓
+                </strong>
+
+                <span>
+                    Արագ կապ և պատվեր
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT PRODUCT
+========================================================= -->
+
+<section class="productLongSection">
+
+    <div class="productLongInner">
+
+        <div>
+
+            <span class="productLongLabel">
+                TEVOSYAN DETAILS
+            </span>
+
+            <h2 class="productLongTitle">
+                Ստեղծված է
+                հարմարավետության համար։
+            </h2>
+
+        </div>
+
+
+        <div class="productLongContent">
+
+            <p>
+                Այս ապրանքը համատեղում է ժամանակակից
+                դիզայնը, հարմարավետությունն ու որակյալ
+                կառուցվածքը՝ Ձեր տան միջավայրը ավելի
+                գեղեցիկ և ամբողջական դարձնելու համար։
+            </p>
+
+            <p>
+                Մենք կարևորում ենք յուրաքանչյուր դետալ՝
+                սկսած արտաքին տեսքից մինչև ամենօրյա
+                օգտագործման հարմարավետությունը։
+            </p>
+
+            <p>
+                Ապրանքի ամբողջական բնութագրերն ու
+                մանրամասները կարող եք տեսնել ստորև։
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SPECIFICATIONS
+========================================================= -->
+
+<section class="productSpecs">
+
+    <div class="productSpecsHeader">
+
+        <span>
+            PRODUCT INFORMATION
+        </span>
+
+        <h2>
+            Ապրանքի տվյալներ
+        </h2>
+
+    </div>
+
+
+    <div class="productSpecsGrid">
+
+        <div class="productSpec">
+
+            <small>
+                Ապրանքի անվանում
+            </small>
+
+            <strong id="specProductName">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="productSpec">
+
+            <small>
+                Կատեգորիա
+            </small>
+
+            <strong id="specCategory">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="productSpec">
+
+            <small>
+                Գնահատական
+            </small>
+
+            <strong id="specRating">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="productSpec">
+
+            <small>
+                Առկա քանակ
+            </small>
+
+            <strong id="specStock">
+                —
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     RELATED PRODUCTS
+========================================================= -->
+
+<section class="relatedProducts">
+
+    <div class="relatedHeader">
+
+        <div>
+
+            <small>
+                TEVOSYAN COLLECTION
+            </small>
+
+            <h2>
+                Ձեզ կարող է նաև
+                հետաքրքրել
+            </h2>
+
+        </div>
+
+
+        <a
+            href="/shop"
+            class="relatedLink"
+        >
+            Դիտել ամբողջ կատալոգը →
+        </a>
+
+    </div>
+
+
+    <div
+        id="relatedProductsGrid"
+        class="relatedGrid"
+    >
+
+        <article class="relatedCard">
+
+            <div class="relatedCardImage">
+
+                <img
+                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=85"
+                    alt="Կահույք"
+                >
+
+            </div>
+
+            <div class="relatedCardBody">
+
+                <span class="relatedCardCategory">
+                    Հյուրասենյակ
+                </span>
+
+                <h3>
+                    <a href="/shop">
+                        Ժամանակակից հավաքածու
+                    </a>
+                </h3>
+
+                <div class="relatedCardPrice">
+
+                    <strong>
+                        Տեսնել →
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="relatedCard">
+
+            <div class="relatedCardImage">
+
+                <img
+                    src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=85"
+                    alt="Ննջասենյակ"
+                >
+
+            </div>
+
+            <div class="relatedCardBody">
+
+                <span class="relatedCardCategory">
+                    Ննջասենյակ
+                </span>
+
+                <h3>
+                    <a href="/shop">
+                        Հարմարավետ լուծումներ
+                    </a>
+                </h3>
+
+                <div class="relatedCardPrice">
+
+                    <strong>
+                        Տեսնել →
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="relatedCard">
+
+            <div class="relatedCardImage">
+
+                <img
+                    src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1000&q=85"
+                    alt="Խոհանոց"
+                >
+
+            </div>
+
+            <div class="relatedCardBody">
+
+                <span class="relatedCardCategory">
+                    Խոհանոց
+                </span>
+
+                <h3>
+                    <a href="/shop">
+                        Ժամանակակից խոհանոց
+                    </a>
+                </h3>
+
+                <div class="relatedCardPrice">
+
+                    <strong>
+                        Տեսնել →
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="relatedCard">
+
+            <div class="relatedCardImage">
+
+                <img
+                    src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=85"
+                    alt="Պահարան"
+                >
+
+            </div>
+
+            <div class="relatedCardBody">
+
+                <span class="relatedCardCategory">
+                    Պահեստավորում
+                </span>
+
+                <h3>
+                    <a href="/shop">
+                        Գործնական կահույք
+                    </a>
+                </h3>
+
+                <div class="relatedCardPrice">
+
+                    <strong>
+                        Տեսնել →
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+
+<section class="productFinalCta">
+
+    <div class="productFinalCtaInner">
+
+        <div class="productFinalCtaContent">
+
+            <small>
+                TEVOSYAN FURNITURE
+            </small>
+
+            <h2>
+                Ձեր տունը
+                սկսվում է ճիշտ ընտրությունից։
+            </h2>
+
+            <p>
+                Բացահայտեք ամբողջ հավաքածուն և գտեք
+                Ձեր տան համար համապատասխան կահույքը՝
+                գեղեցիկ դիզայնով և հարմարավետությամբ։
+            </p>
+
+            <a href="/shop">
+                Դիտել ամբողջ կատալոգը
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const name = document.getElementById("productName");
+    const category = document.getElementById("productCategory");
+    const rating = document.getElementById("productRating");
+    const stock = document.getElementById("productStock");
+
+    const specName = document.getElementById("specProductName");
+    const specCategory = document.getElementById("specCategory");
+    const specRating = document.getElementById("specRating");
+    const specStock = document.getElementById("specStock");
+
+    const observer = new MutationObserver(() => {
+
+        if (name && specName) {
+            specName.textContent =
+                name.textContent || "—";
+        }
+
+        if (category && specCategory) {
+            specCategory.textContent =
+                category.textContent || "—";
+        }
+
+        if (rating && specRating) {
+            specRating.textContent =
+                rating.textContent || "—";
+        }
+
+        if (stock && specStock) {
+            specStock.textContent =
+                stock.textContent || "—";
+        }
+
+    });
+
+    if (name) {
+        observer.observe(
+            name,
+            {
+                childList: true,
+                subtree: true,
+                characterData: true
+            }
+        );
+    }
+
+    if (category) {
+        observer.observe(
+            category,
+            {
+                childList: true,
+                subtree: true,
+                characterData: true
+            }
+        );
+    }
+
+    if (rating) {
+        observer.observe(
+            rating,
+            {
+                childList: true,
+                subtree: true,
+                characterData: true
+            }
+        );
+    }
+
+    if (stock) {
+        observer.observe(
+            stock,
+            {
+                childList: true,
+                subtree: true,
+                characterData: true
+            }
+        );
+    }
+
+});
+
+</script>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script
+    src="{{ url_for('static', filename='js/product.js') }}"
+></script>
+
+{% endblock %}
